@@ -8,11 +8,12 @@ jobs:
     environment:
       JVM_OPTS: -Xmx3200m
     steps:
-      - checkout
       - run:
-          command: |
+        name: Clean docker
+        command: |
           docker prune
           docker images
+      - checkout
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
