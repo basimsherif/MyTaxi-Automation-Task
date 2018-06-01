@@ -8,6 +8,8 @@ jobs:
     environment:
       JVM_OPTS: -Xmx3200m
     steps:
+      - setup_remote_docker:   # (2)
+              docker_layer_caching: true # (3)
       - run:
           name: Pre Docker cleanup
           command: docker volume prune --force
