@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'com.google.gms.google-services'
 android {
     compileSdkVersion 26
     defaultConfig {
@@ -49,4 +49,5 @@ dependencies {
     debugImplementation ('com.jakewharton.espresso:okhttp3-idling-resource:1.0.0') {
         exclude module: 'support-annotations'
     }
+    compile 'com.google.firebase:firebase-core:11.6.0'
 }
