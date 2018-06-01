@@ -126,9 +126,9 @@ public class Utils
     /**
      * This function is used to put delay between test steps
      * @param seconds Number seconds script needs to wait
-     **//*
+     **/
     public static void wait(int seconds){
         onView(isRoot()).perform(waitForElement(seconds * 1000));
-    }*/
+    }
 
 }

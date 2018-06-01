@@ -62,6 +62,7 @@ public class LoginTests extends BaseTest {
     @Test
     public void verifyLogin() throws Exception {
         authenticationPage.login(user.getUsername(), user.getPassword());
+        Utils.wait(2);
         homePage.assertHomePageOpened();
     }
 
@@ -73,8 +74,10 @@ public class LoginTests extends BaseTest {
     @Test
     public void verifyLogout() throws Exception {
         authenticationPage.login(user.getUsername(), user.getPassword());
+        Utils.wait(2);
         homePage.assertHomePageOpened();
         homePage.logOut();
+        Utils.wait(2);
         authenticationPage.assertLoginPageOpened();
     }
 
