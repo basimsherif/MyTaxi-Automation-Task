@@ -1,0 +1,60 @@
+{
+  "project_info": {
+    "project_number": "841695830600",
+    "firebase_url": "https://winged-sol-205816.firebaseio.com",
+    "project_id": "winged-sol-205816",
+    "storage_bucket": "winged-sol-205816.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:841695830600:android:9fd89781260796b5",
+        "android_client_info": {
+          "package_name": "com.mytaxi.android_demo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "841695830600-o2t3bhdervlsf1pqcg72vctcqajk58dd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mytaxi.android_demo",
+            "certificate_hash": "9de89fef7c8ce6505523713d67c3211eaedf4663"
+          }
+        },
+        {
+          "client_id": "841695830600-u38ajvqd2b233ovoiiof5n9npo66cdbk.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "841695830600-u38ajvqd2b233ovoiiof5n9npo66cdbk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClmszfW5wzdgkaqzabSrnxtoNuBnSX8MY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "841695830600-u38ajvqd2b233ovoiiof5n9npo66cdbk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+
+}
