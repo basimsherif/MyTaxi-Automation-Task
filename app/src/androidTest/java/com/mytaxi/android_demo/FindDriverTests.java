@@ -40,7 +40,6 @@ public class FindDriverTests extends BaseTest {
         //Not logged in to the app. So, we will perform login.
         if(authenticationPage.ifAuthenticationPageOpened()){
             authenticationPage.login(user.getUsername(), user.getPassword());
-            Utils.wait(2);
         }
 
     }
