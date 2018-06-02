@@ -43,7 +43,7 @@ jobs:
       #    no_output_timeout: 30m
       - run:
           name: Download instrumented test results from Firebase Test Lab
-          command: set -e gsutil -d -m cp -r -U -e "`gsutil ls gs://test-lab-qbdm2npcvh60u-i046mbwutkrw2 | tail -1`*" firebase/
+          command: gsutil -d -m cp -r -U -e "`gsutil ls gs://test-lab-qbdm2npcvh60u-i046mbwutkrw2 | tail -1`*" firebase/
       - store_artifacts:
           path: firebase/
           destination: reports
