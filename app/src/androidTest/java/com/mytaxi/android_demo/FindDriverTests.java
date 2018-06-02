@@ -24,7 +24,6 @@ import okhttp3.mockwebserver.MockWebServer;
 
 /**
  * This test class contains all the test cases related to find driver functionality
- * Author:Basim Sherif
  **/
 @RunWith(Parameterized.class)
 public class FindDriverTests extends BaseTest {

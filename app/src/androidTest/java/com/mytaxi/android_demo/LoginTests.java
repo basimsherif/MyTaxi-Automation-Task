@@ -26,7 +26,6 @@ import okhttp3.mockwebserver.MockWebServer;
 
 /**
  * This test class contains all the test cases related to login functionality
- * Author:Basim Sherif
  **/
 @RunWith(Parameterized.class)
 public class LoginTests extends BaseTest {
@@ -58,7 +57,6 @@ public class LoginTests extends BaseTest {
     /**
      * This testcase will verify login
      * Test ID:02
-     * Author:Basim Sherif
      * **/
     @Test
     public void verifyLogin() throws Exception {
@@ -69,7 +67,6 @@ public class LoginTests extends BaseTest {
     /**
      * This testcase will verify logout
      * Test ID:03
-     * Author:Basim Sherif
      * **/
     @Test
     public void verifyLogout() throws Exception {
@@ -86,7 +83,7 @@ public class LoginTests extends BaseTest {
     public void tearDown() throws Exception{
         //will check current running test name, so that we can run tear down for specific tests
         if(currentTestName.getMethodName().contains("verifyLogin")){
-            //Will restart main activity
+            //Will restart main activity and logout
             Log.d(TAG, "Restarting Main Activity");
             mActivityRule.launchActivity(new Intent());
             if(homePage.ifHomePageOpened())
