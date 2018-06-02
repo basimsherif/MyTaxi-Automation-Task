@@ -41,10 +41,17 @@ jobs:
               echo 'export TEST_APK_PATH=`find "." "-path" "*Test*.apk" -print -quit`' >> $BASH_ENV
       - run:
           name: Run UI Tests
-          command: gcloud firebase test android run --type instrumentation --app app/build/outputs/apk/debug/app-debug.apk --test ${TEST_APK_PATH} --device model=Nexus6P,version=27,locale=en,orientation=portrait --timeout 30m
+          command: gcloud firebase test android run --type instrumentation --app app/build/outputs/apk/debug/app-debug.apk --test ${TEST_APK_PATH} --device model=Nexus6P,version=27,locale=en,orientation=portrait --environment-variables coverage=true,coverageFile=/sdcard/tmp/code-coverage/connected/coverage.ec --directories-to-pull=/sdcard/tmp --timeout 30m
           no_output_timeout: 30m
+      - run:
+          name: Create directory to store test results
+          command: mkdir firebase
+      - run:
+          name: Download instrumented test results from Firebase Test Lab
+          command: gsutil -m cp -r -U "`gsutil ls gs://test-lab-qbdm2npcvh60u-i046mbwutkrw2 | tail -1`*" /root/workspace/firebase/
+      - *persist_firebase_workspace
       - store_artifacts:
-          path: app/build/reports
+          path: firebase/
           destination: reports
       - store_test_results:
           path: app/build/reports
