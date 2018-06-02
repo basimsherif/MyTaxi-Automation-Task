@@ -36,7 +36,7 @@ jobs:
       - run: gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
       - run:
           name: Create directory to store test results
-          command: mkdir ${HOME}/firebase
+          command: /home/circleci/firebase
       #- run:
       #    name: Run Espresso UI Tests
       #    command: gcloud firebase test android run --type instrumentation --app app/build/outputs/apk/debug/app-debug.apk --test app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk --device model=Nexus6P,version=27,locale=en,orientation=portrait --environment-variables coverage=true,coverageFile=/sdcard/tmp/code-coverage/connected/coverage.ec --directories-to-pull=/sdcard/tmp --timeout 30m
@@ -44,7 +44,7 @@ jobs:
       - run:
           name: Download instrumented test results from Firebase Test Lab
           #command: gsutil -m cp -r -U "`gsutil ls gs://test-lab-qbdm2npcvh60u-i046mbwutkrw2 | tail -1`*" $CIRCLE_ARTIFACTS/
-          command: gsutil -m cp -r -U "`gsutil ls gs://test-lab-qbdm2npcvh60u-i046mbwutkrw2 | tail -1`*" ${HOME}/firebase
+          command: gsutil -m cp -r -U "`gsutil ls gs://test-lab-qbdm2npcvh60u-i046mbwutkrw2 | tail -1`*" /home/circleci/firebase
       - store_artifacts:
-          path: ${HOME}/firebase
+          path: /home/circleci/firebase
           destination: reports
