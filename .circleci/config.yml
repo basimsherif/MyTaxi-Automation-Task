@@ -45,3 +45,6 @@ jobs:
           name: Download instrumented test results from Firebase Test Lab
           #command: gsutil -m cp -r -U "`gsutil ls gs://test-lab-qbdm2npcvh60u-i046mbwutkrw2 | tail -1`*" $CIRCLE_ARTIFACTS/
           command: gsutil -m cp -r -U "`gsutil ls gs://test-lab-qbdm2npcvh60u-i046mbwutkrw2 | tail -1`*" ${HOME}/firebase
+      - store_artifacts:
+          path: ${HOME}/firebase
+          destination: reports
