@@ -36,6 +36,7 @@ public class LoginTests extends BaseTest {
 
     @Before
     public void setUp() throws Exception{
+        allowPermissionsIfNeeded();
         if(homePage.ifHomePageOpened())
             homePage.logOut();
     }

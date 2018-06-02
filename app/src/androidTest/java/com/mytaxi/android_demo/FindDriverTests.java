@@ -37,6 +37,7 @@ public class FindDriverTests extends BaseTest {
     public void setUp() throws Exception{
         server = new MockWebServer();
         server.start();
+        allowPermissionsIfNeeded();
         //Not logged in to the app. So, we will perform login.
         if(authenticationPage.ifAuthenticationPageOpened()){
             authenticationPage.login(user.getUsername(), user.getPassword());
