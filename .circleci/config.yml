@@ -26,18 +26,22 @@ jobs:
           paths:
             - ~/.gradle
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
-      - run:
-          name: Assemble APKs
-          command: ./gradlew assembleAndroidTest assemble
+      #- run:
+      #    name: Assemble APKs
+      #    command: ./gradlew assembleAndroidTest assemble
       - run:
           name: Dump Google Cloud Credentials to file
           command: echo ${GOOGLE_AUTH} > ${HOME}/gcp-key.json
       - run: gcloud auth activate-service-account --key-file ${HOME}/gcp-key.json
       - run: gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
       - run:
-          name: Run Espresso UI Tests
-          command: gcloud firebase test android run --type instrumentation --app app/build/outputs/apk/debug/app-debug.apk --test app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk --device model=Nexus6P,version=27,locale=en,orientation=portrait --environment-variables coverage=true,coverageFile=/sdcard/tmp/code-coverage/connected/coverage.ec --directories-to-pull=/sdcard/tmp --timeout 30m
-          no_output_timeout: 30m
+          name: Create directory to store test results
+          command: mkdir firebase
+      #- run:
+      #    name: Run Espresso UI Tests
+      #    command: gcloud firebase test android run --type instrumentation --app app/build/outputs/apk/debug/app-debug.apk --test app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk --device model=Nexus6P,version=27,locale=en,orientation=portrait --environment-variables coverage=true,coverageFile=/sdcard/tmp/code-coverage/connected/coverage.ec --directories-to-pull=/sdcard/tmp --timeout 30m
+      #    no_output_timeout: 30m
       - run:
           name: Download instrumented test results from Firebase Test Lab
-          command: sudo gsutil -m cp -r -U "`gsutil ls gs://test-lab-qbdm2npcvh60u-i046mbwutkrw2 | tail -1`*" $CIRCLE_ARTIFACTS/
+          #command: gsutil -m cp -r -U "`gsutil ls gs://test-lab-qbdm2npcvh60u-i046mbwutkrw2 | tail -1`*" $CIRCLE_ARTIFACTS/
+          command: gsutil -m cp -r -U "`gsutil ls gs://test-lab-qbdm2npcvh60u-i046mbwutkrw2 | tail -1`*" /root/workspace/firebase/
