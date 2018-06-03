@@ -1,6 +1,5 @@
 package com.mytaxi.android_demo;
 
-import android.content.Intent;
 import android.util.Log;
 
 import com.mytaxi.android_demo.base.BaseTest;
@@ -10,7 +9,6 @@ import com.mytaxi.android_demo.utils.Utils;
 import com.mytaxi.android_demo.utils.network.HttpClient;
 
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,9 +29,11 @@ public class FindDriverTests extends BaseTest {
     User user;
     String TAG = "Find driver tests";
     private MockWebServer server;
+    String RANDOM_USER_URL;
 
     @Before
     public void setUp() throws Exception{
+        RANDOM_USER_URL =  HttpClient.RANDOM_USER_URL;
         server = new MockWebServer();
         server.start();
         allowPermissionsIfNeeded();
@@ -73,16 +73,14 @@ public class FindDriverTests extends BaseTest {
         server.enqueue(new MockResponse()
                 .setResponseCode(200)
                 .setBody(jsonBody));
-        Intent intent = new Intent();
-        mActivityRule.launchAppActivity(intent);
         homePage.assertHomePageOpened();
-        homePage.searchDriver("sa","Sarah Friedrich");
+        homePage.tapLocationButton();
+        homePage.searchAndTapDriver("sa","Sarah Friedrich");
         ArrayList<Driver> driverList = Utils.getDrivers(jsonBody);
         driverDetailsPage.verifyDriverDetailsPage(driverList.get(65));
-        driverDetailsPage.tapCallButton();
+        driverDetailsPage.verifyCallIntent(driverList.get(65).getPhone());
 
     }
-
 
     /**
      * This function will execute after each test cases. Can be used to clear memory/resources.
@@ -93,9 +91,8 @@ public class FindDriverTests extends BaseTest {
         if(currentTestName.getMethodName().contains("verifyDriverDetailsScreen")){
             //Will restart main activity
             Log.d(TAG, "Restarting Main Activity");
-            //mActivityRule.launchActivity(new Intent());
             server.shutdown();
-            HttpClient.RANDOM_USER_URL =  "https://randomuser.me/api/";
+            HttpClient.RANDOM_USER_URL =  RANDOM_USER_URL;
 
         }
     }

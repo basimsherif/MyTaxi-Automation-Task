@@ -1,28 +1,18 @@
 package com.mytaxi.android_demo;
 
 import android.content.Intent;
-import android.support.test.rule.ActivityTestRule;
 import android.util.Log;
 
-import com.mytaxi.android_demo.activities.MainActivity;
 import com.mytaxi.android_demo.base.BaseTest;
 import com.mytaxi.android_demo.model.User;
-import com.mytaxi.android_demo.rules.RetryActivityTestRule;
-import com.mytaxi.android_demo.utils.Constants;
-import com.mytaxi.android_demo.utils.Utils;
-import com.mytaxi.android_demo.utils.network.HttpClient;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import java.util.Arrays;
-
-import okhttp3.mockwebserver.MockResponse;
-import okhttp3.mockwebserver.MockWebServer;
 
 /**
  * This test class contains all the test cases related to login functionality
@@ -74,6 +64,17 @@ public class LoginTests extends BaseTest {
         homePage.assertHomePageOpened();
         homePage.logOut();
         authenticationPage.assertLoginPageOpened();
+    }
+
+    /**
+     * This testcase will verify invalid login scenario
+     * Test ID:04
+     * **/
+    @Test
+    public void verifyInvalidLogin() throws Exception {
+        authenticationPage.login("Fakeuser", "12345");
+        authenticationPage.verifyLoginFailedErrorMessage();
+        homePage.assertHomePageNotOpened();
     }
 
     /**

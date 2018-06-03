@@ -10,7 +10,6 @@ import junit.framework.Assert;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.action.ViewActions.replaceText;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.RootMatchers.withDecorView;
@@ -49,10 +48,18 @@ public class HomePage extends BasePage {
     }
 
     /**
+     * This function is used to assert home page not opened
+     **/
+    public void assertHomePageNotOpened(){
+        Log.d(TAG, "Verify if home page not opened");
+        Assert.assertFalse("Home page opened",ifHomePageOpened());
+    }
+
+    /**
      * This function is used to search driver
      * @param driverName Name of the driver to be searched.
      **/
-    public void searchDriver(String searchQuery, String driverName){
+    public void searchAndTapDriver(String searchQuery, String driverName){
         assertHomePageOpened();
         Log.d(TAG, "Type driver name query in edit text");
         setTextInAutoComplete(searchQuery);
@@ -73,27 +80,11 @@ public class HomePage extends BasePage {
     }
 
     /**
-     * This function is used to verify text in auto complete text view
-     * @param driverName Name of the driver to be verified in auto complete
+     * This function is used to tap location button
      **/
-    public void verifyTextInAutoCompleteList(String driverName){
-        Log.d(TAG, "Verifying text "+driverName+" is present in list");
-        onView(withText(driverName))
-                .inRoot(withDecorView(not(is(mActivityTestRule.getActivity().getWindow().getDecorView()))))
-                .check(matches(isDisplayed()));
-    }
-
-    /**
-     * This function will tap back button
-     **/
-    public void tapBackButton(){
-        Log.d(TAG, "Tapping navigation up button");
-        if(Utils.onViewCheckSafe(onView(withContentDescription("Navigate up")), matches(isDisplayed()))){
-            onView(withContentDescription("Navigate up")).perform(click());
-        }else{
-            Log.d(TAG, "If the button is not available, we will simply call pressBack function");
-            Utils.pressBack();
-        }
+    public void tapLocationButton(){
+        Log.d(TAG, "Taping location button");
+        onView(withId(R.id.fab)).perform(click());
     }
 
     /**
@@ -101,6 +92,9 @@ public class HomePage extends BasePage {
      **/
     public void logOut(){
         Log.d(TAG, "Tapping hamburger button");
+        onView(withContentDescription(R.string.navigation_drawer_open)).perform(click());
+        Utils.pressBack();
+        Utils.wait(1);
         onView(withContentDescription(R.string.navigation_drawer_open)).perform(click());
         Log.d(TAG, "Tapping logout button");
         onView(withText(R.string.text_item_title_logout)).perform(click());

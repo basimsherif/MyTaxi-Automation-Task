@@ -31,13 +31,10 @@ public class BaseTest {
     public AuthenticationPage authenticationPage = new AuthenticationPage();
     public HomePage homePage = new HomePage(mActivityRule);
     public DriverDetailsPage driverDetailsPage = new DriverDetailsPage();
-    public BasePage basePage = new BasePage();
 
-    public void restartApp(){
-        mActivityRule.finishActivity();
-        mActivityRule.launchActivity(null);
-    }
-
+    /**
+     * This will handle runtime permission dialogs
+     **/
     public void allowPermissionsIfNeeded()  {
         if (Build.VERSION.SDK_INT >= 23) {
             UiDevice mDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());

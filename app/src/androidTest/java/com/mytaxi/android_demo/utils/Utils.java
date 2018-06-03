@@ -7,7 +7,6 @@ import android.support.test.espresso.ViewInteraction;
 import android.support.test.uiautomator.UiDevice;
 import android.view.View;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -84,6 +83,10 @@ public class Utils
         return sb.toString();
     }
 
+    /**
+     * Helper function for getting Driver list from Json response
+     * @param jsonResponse json response string
+     **/
     public static ArrayList<Driver> getDrivers(String jsonResponse) {
         JsonParser mJsonParser = new JsonParser();
         JsonObject jsonObject = mJsonParser.parse(jsonResponse).getAsJsonObject();

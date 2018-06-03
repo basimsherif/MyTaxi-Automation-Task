@@ -11,6 +11,10 @@ import static android.view.WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD;
 import static android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON;
 import static android.view.WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON;
 
+
+/**
+ *  A custom JUnit Runner class which will make sure that the screen will be turned ON throughout the test execution
+ **/
 public class CustomJUnitRunner extends AndroidJUnitRunner {
 
     @Override public void onCreate(Bundle arguments) {

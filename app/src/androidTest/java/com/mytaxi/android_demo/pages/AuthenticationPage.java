@@ -1,5 +1,6 @@
 package com.mytaxi.android_demo.pages;
 
+import android.support.test.espresso.Espresso;
 import android.util.Log;
 
 import com.mytaxi.android_demo.R;
@@ -12,8 +13,9 @@ import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.core.AllOf.allOf;
 
 /**
  *  This class contains all the functions related to Authentication Page
@@ -43,6 +45,7 @@ public class AuthenticationPage extends BasePage {
     public void login(String userName, String password){
         setTextInUserNameField(userName);
         setTextInPasswordField(password);
+        Espresso.closeSoftKeyboard();
         tapLoginButton();
     }
 
@@ -70,6 +73,15 @@ public class AuthenticationPage extends BasePage {
     public void tapLoginButton(){
         Log.d(TAG, "Taping login button");
         onView(withId(R.id.btn_login)).perform(click());
+    }
+
+    /**
+     * This function is used to verify if error message is shown if login failed
+     **/
+    public void verifyLoginFailedErrorMessage(){
+        Log.d(TAG, "Verify the snackbar(Toast) is shown properly");
+        onView(allOf(withId(android.support.design.R.id.snackbar_text), withText(R.string.message_login_fail)))
+                .check(matches(isDisplayed()));
     }
 
 }
