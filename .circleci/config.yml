@@ -56,5 +56,5 @@ jobs:
           name: Generate JaCoCo report
           command: ./gradlew -PciBuild=true :app:jacocoTestReport
       - store_artifacts:
-          path: app/build/reports/jacoco/jacocoTestReport
+          path: app/build/reports/jacoco
           destination: reports
